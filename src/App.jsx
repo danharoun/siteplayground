@@ -10,6 +10,8 @@ import {
   editable as e,
 } from "@theatre/r3f";
 
+import React from "react";
+
 export default function App() {
   const sheet = getProject("Fly Through", { state: theatreState }).sheet(
     "Scene"
@@ -29,7 +31,20 @@ export default function App() {
 function Scene() {
   const sheet = useCurrentSheet();
   const scroll = useScroll();
-  const gltf = useGLTF("/Website3DBoxV01.gltf");
+  const gltf = useGLTF("/cUBE3_sIMPL.gltf");
+
+  // Set material properties for the model
+  React.useEffect(() => {
+    if (gltf.scene) {
+      gltf.scene.traverse((child) => {
+        if (child.isMesh) {
+          child.material.metalness = 0.8;
+          child.material.roughness = 0.2;
+          child.material.envMapIntensity = 1;
+        }
+      });
+    }
+  }, [gltf]);
 
   // our callback will run on every animation frame
   useFrame(() => {
@@ -39,8 +54,8 @@ function Scene() {
     sheet.sequence.position = scroll.offset * sequenceLength;
   });
 
-  // const bgColor = "#84a4f4";
-  const bgColor = "#0d0d0d"; // Dark background color for a modern universe theme
+  const bgColor = "#84a4f4";
+  // const bgColor = "#0d0d0d"; // Dark background color for a modern universe theme
   const starColor = "#ffffff"; // White color for stars
 
   // Add a starry sky effect
@@ -69,11 +84,17 @@ function Scene() {
   return (
     <>
       <color attach="background" args={[bgColor]} />
-      <fog attach="fog" color={bgColor} near={-4} far={10} />
+      {/* <fog attach="fog" color={bgColor} near={-4} far={10} /> */}
       <ambientLight intensity={0.5} />
       <directionalLight position={[-5, 5, -5]} intensity={1.5} />
-      <e.group theatreKey="Website3DBoxV01">
-        <primitive object={gltf.scene} castShadow receiveShadow />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <pointLight position={[0, 2, 0]} intensity={0.8} />
+      <e.group theatreKey="Website3DBoxV01" scale={0.5}>
+        <primitive 
+          object={gltf.scene} 
+          castShadow 
+          receiveShadow 
+        />
       </e.group>
       <PerspectiveCamera
         theatreKey="Camera"
