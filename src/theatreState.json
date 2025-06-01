@@ -3,7 +3,7 @@
     "Scene": {
       "staticOverrides": {
         "byObject": {
-          "Camera": {
+          "Camera_scroll": {
             "position": {
               "x": -1.573250851346216,
               "y": 1.0885073380736379,
@@ -17,11 +17,11 @@
         "length": 3.88,
         "type": "PositionalSequence",
         "tracksByObject": {
-          "Camera": {
+          "Camera_scroll": {
             "trackData": {
               "OXrC30ZgQa": {
                 "type": "BasicKeyframedTrack",
-                "__debugName": "Camera:[\"position\",\"x\"]",
+                "__debugName": "Camera_scroll:[\"position\",\"x\"]",
                 "keyframes": [
                   {
                     "id": "OBDq-i-UdE",
@@ -75,7 +75,7 @@
               },
               "XA7I2c_mMk": {
                 "type": "BasicKeyframedTrack",
-                "__debugName": "Camera:[\"position\",\"y\"]",
+                "__debugName": "Camera_scroll:[\"position\",\"y\"]",
                 "keyframes": [
                   {
                     "id": "RHE6724qND",
@@ -129,7 +129,7 @@
               },
               "Vmpt9vf3yw": {
                 "type": "BasicKeyframedTrack",
-                "__debugName": "Camera:[\"position\",\"z\"]",
+                "__debugName": "Camera_scroll:[\"position\",\"z\"]",
                 "keyframes": [
                   {
                     "id": "L_pB3gM_VF",
@@ -183,7 +183,7 @@
               },
               "tzzU7BxATF": {
                 "type": "BasicKeyframedTrack",
-                "__debugName": "Camera:[\"rotation\",\"x\"]",
+                "__debugName": "Camera_scroll:[\"rotation\",\"x\"]",
                 "keyframes": [
                   {
                     "id": "C6rxBJx-3G",
@@ -237,7 +237,7 @@
               },
               "bB_cOPPYqL": {
                 "type": "BasicKeyframedTrack",
-                "__debugName": "Camera:[\"rotation\",\"y\"]",
+                "__debugName": "Camera_scroll:[\"rotation\",\"y\"]",
                 "keyframes": [
                   {
                     "id": "L2dC-OBHnu",
@@ -291,7 +291,7 @@
               },
               "u5_1SRkyFn": {
                 "type": "BasicKeyframedTrack",
-                "__debugName": "Camera:[\"rotation\",\"z\"]",
+                "__debugName": "Camera_scroll:[\"rotation\",\"z\"]",
                 "keyframes": [
                   {
                     "id": "VPcobS7oOv",
@@ -352,6 +352,145 @@
               "[\"rotation\",\"y\"]": "bB_cOPPYqL",
               "[\"rotation\",\"z\"]": "u5_1SRkyFn"
             }
+          },
+          "Website3DBoxV01_scroll": {
+            "trackData": {},
+            "trackIdByPropPath": {}
+          }
+        }
+      }
+    },
+    "RotateScene": {
+      "staticOverrides": {
+        "byObject": {
+          "Camera_rotate": {
+            "position": {
+              "x": 0,
+              "y": 2,
+              "z": 5
+            }
+          },
+          "Website3DBoxV01_rotate": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "scale": {
+              "x": 0.5,
+              "y": 0.5,
+              "z": 0.5
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 5,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Camera_rotate": {
+            "trackData": {},
+            "trackIdByPropPath": {}
+          },
+          "Website3DBoxV01_rotate": {
+            "trackData": {},
+            "trackIdByPropPath": {}
+          }
+        }
+      }
+    },
+    "ZoomScene": {
+      "staticOverrides": {
+        "byObject": {
+          "Camera_zoom": {
+            "position": {
+              "x": 0,
+              "y": 2,
+              "z": 8
+            }
+          },
+          "Website3DBoxV01_zoom": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "scale": {
+              "x": 0.5,
+              "y": 0.5,
+              "z": 0.5
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 6,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Camera_zoom": {
+            "trackData": {},
+            "trackIdByPropPath": {}
+          },
+          "Website3DBoxV01_zoom": {
+            "trackData": {},
+            "trackIdByPropPath": {}
+          }
+        }
+      }
+    },
+    "OrbitScene": {
+      "staticOverrides": {
+        "byObject": {
+          "Camera_orbit": {
+            "position": {
+              "x": 5,
+              "y": 2,
+              "z": 5
+            }
+          },
+          "Website3DBoxV01_orbit": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "scale": {
+              "x": 0.5,
+              "y": 0.5,
+              "z": 0.5
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 8,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Camera_orbit": {
+            "trackData": {},
+            "trackIdByPropPath": {}
+          },
+          "Website3DBoxV01_orbit": {
+            "trackData": {},
+            "trackIdByPropPath": {}
           }
         }
       }
