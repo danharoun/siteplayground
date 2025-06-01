@@ -446,6 +446,32 @@
           "Website3DBoxV01_zoom": {
             "trackData": {},
             "trackIdByPropPath": {}
+          },
+          "Stars_zoom": {
+            "trackData": {
+              "rotationY": {
+                "type": "BasicKeyframedTrack",
+                "keyframes": [
+                  {
+                    "id": "key1",
+                    "position": 0,
+                    "value": 0,
+                    "handles": [0.5, 0.5, 0.5, 0.5],
+                    "type": "bezier"
+                  },
+                  {
+                    "id": "key2",
+                    "position": 6,
+                    "value": 6.28,
+                    "handles": [0.5, 0.5, 0.5, 0.5],
+                    "type": "bezier"
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"rotation\",\"y\"]": "rotationY"
+            }
           }
         }
       }

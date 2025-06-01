@@ -15,6 +15,7 @@ import React, { useState, useRef } from "react";
 export default function App() {
   const project = getProject("Fly Through", { state: theatreState });
   const [activeAnimation, setActiveAnimation] = useState("scroll");
+  const [isPlaying, setIsPlaying] = useState(true);
   
   // Get all sheets - using your existing "Scene" sheet for scroll
   const sheets = {
@@ -29,6 +30,12 @@ export default function App() {
   // Function to handle animation switching
   const handleAnimationSwitch = (animationType) => {
     setActiveAnimation(animationType);
+    setIsPlaying(true);
+  };
+
+  // Add play/pause toggle function
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -174,6 +181,33 @@ export default function App() {
         )}
       </div>
 
+      {/* Add Play/Pause button */}
+      <div style={{
+        position: "fixed",
+        bottom: 20,
+        left: "50%",
+        transform: "translateX(-50%)",
+        zIndex: 1000
+      }}>
+        <button 
+          onClick={togglePlayPause}
+          style={{
+            padding: "12px 16px",
+            backgroundColor: "#28a745",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "500",
+            transition: "all 0.2s ease",
+            minWidth: "120px"
+          }}
+        >
+          {isPlaying ? "⏸ Pause" : "▶ Play"}
+        </button>
+      </div>
+
       <Canvas gl={{ preserveDrawingBuffer: true }}>
         <ScrollControls pages={5}>
           <SheetProvider sheet={currentSheet}>
@@ -181,7 +215,8 @@ export default function App() {
             <Scene 
               key={activeAnimation} 
               activeAnimation={activeAnimation} 
-              currentSheet={currentSheet} 
+              currentSheet={currentSheet}
+              isPlaying={isPlaying}
             />
           </SheetProvider>
         </ScrollControls>
@@ -190,7 +225,7 @@ export default function App() {
   );
 }
 
-function Scene({ activeAnimation, currentSheet }) {
+function Scene({ activeAnimation, currentSheet, isPlaying }) {
   const sheet = useCurrentSheet();
   const scroll = useScroll();
   const gltf = useGLTF("/cUBE3_sIMPL.gltf");
@@ -229,17 +264,15 @@ function Scene({ activeAnimation, currentSheet }) {
 
     const sequenceLength = val(sheet.sequence.pointer.length);
 
-    // Check if Studio is playing the sequence
-    if (sheet.sequence.playing) {
-      return; // Let Studio control the animation
-    }
+    // Respect Theatre.js Studio playback
+    if (sheet.sequence.playing) return;
 
     if (activeAnimation === "scroll") {
-      // Original scroll-based animation using your existing keyframes
       sheet.sequence.position = scroll.offset * sequenceLength;
     } else {
-      // Handle keyframe-based animations for other sheets
       setAnimationTime(prev => {
+        if (!isPlaying) return prev;
+        
         const newTime = prev + delta;
         let normalizedTime = 0;
 
@@ -287,17 +320,19 @@ function Scene({ activeAnimation, currentSheet }) {
       positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
     }
     return (
-      <points>
-        <bufferGeometry attach="geometry">
-          <bufferAttribute
-            attachObject={["attributes", "position"]}
-            array={positions}
-            count={count}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <pointsMaterial attach="material" color={starColor} size={0.1} />
-      </points>
+      <e.group theatreKey={`Stars_${activeAnimation}`}>
+        <points>
+          <bufferGeometry attach="geometry">
+            <bufferAttribute
+              attachObject={["attributes", "position"]}
+              array={positions}
+              count={count}
+              itemSize={3}
+            />
+          </bufferGeometry>
+          <pointsMaterial attach="material" color={starColor} size={0.1} />
+        </points>
+      </e.group>
     );
   }
 
