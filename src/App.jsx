@@ -37,7 +37,32 @@ function Scene() {
     sheet.sequence.position = scroll.offset * sequenceLength;
   });
 
-  const bgColor = "#84a4f4";
+  // const bgColor = "#84a4f4";
+  const bgColor = "#0d0d0d"; // Dark background color for a modern universe theme
+  const starColor = "#ffffff"; // White color for stars
+
+  // Add a starry sky effect
+  function Stars({ count = 5000 }) {
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 100;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+    }
+    return (
+      <points>
+        <bufferGeometry attach="geometry">
+          <bufferAttribute
+            attachObject={["attributes", "position"]}
+            array={positions}
+            count={count}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial attach="material" color={starColor} size={0.1} />
+      </points>
+    );
+  }
 
   return (
     <>
