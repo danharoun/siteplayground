@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Gltf, ScrollControls, useScroll } from "@react-three/drei";
+import { Gltf, ScrollControls, useScroll, useGLTF } from "@react-three/drei";
 import { getProject, val } from "@theatre/core";
 import theatreState from "./theatreState.json";
 
@@ -7,6 +7,7 @@ import {
   SheetProvider,
   PerspectiveCamera,
   useCurrentSheet,
+  editable as e,
 } from "@theatre/r3f";
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
 function Scene() {
   const sheet = useCurrentSheet();
   const scroll = useScroll();
+  const gltf = useGLTF("/Website3DBoxV01.gltf");
 
   // our callback will run on every animation frame
   useFrame(() => {
@@ -70,7 +72,9 @@ function Scene() {
       <fog attach="fog" color={bgColor} near={-4} far={10} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[-5, 5, -5]} intensity={1.5} />
-      <Gltf src="/environment.glb" castShadow receiveShadow />
+      <e.group theatreKey="Website3DBoxV01">
+        <primitive object={gltf.scene} castShadow receiveShadow />
+      </e.group>
       <PerspectiveCamera
         theatreKey="Camera"
         makeDefault
